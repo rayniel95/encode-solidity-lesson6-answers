@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 // https://github.com/dethcrypto/TypeChain
-// import { HelloWorld } from "../typechain-types";
+import { HelloWorld } from "../typechain-types";
 // https://hardhat.org/hardhat-network-helpers/docs/overview
 import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 
@@ -44,19 +44,19 @@ describe("HelloWorld", function () {
     expect(contractOwner).to.equal(accounts[0].address);
   });
 
-//   it("Should not allow anyone other than owner to call transferOwnership", async function () {
-//     // https://hardhat.org/hardhat-network-helpers/docs/reference#fixtures
-//     const { helloWorldContract, accounts } = await loadFixture(deployContract);
+  it("Should not allow anyone other than owner to call transferOwnership", async function () {
+    // https://hardhat.org/hardhat-network-helpers/docs/reference#fixtures
+    const { helloWorldContract, accounts } = await loadFixture(deployContract);
   
-//     // https://docs.ethers.org/v6/api/contract/#BaseContract-connect
-//     // https://docs.ethers.org/v6/api/contract/#BaseContractMethod
-//     // https://hardhat.org/hardhat-chai-matchers/docs/overview#reverts
-//     await expect(
-//       helloWorldContract
-//         .connect(accounts[1])
-//         .transferOwnership(accounts[1].address)
-//     ).to.be.revertedWith("Caller is not the owner");
-//   });
+    // https://docs.ethers.org/v6/api/contract/#BaseContract-connect
+    // https://docs.ethers.org/v6/api/contract/#BaseContractMethod
+    // https://hardhat.org/hardhat-chai-matchers/docs/overview#reverts
+    await expect(
+      helloWorldContract
+        .connect(accounts[1])
+        .transferOwnership(accounts[1].address)
+    ).to.be.revertedWith("Caller is not the owner");
+  });
 
   it("Should execute transferOwnership correctly", async function () {
     // TODO
